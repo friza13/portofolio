@@ -5,23 +5,47 @@ import { motion } from "framer-motion"
 import { Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
 
-interface NavbarProps {
-  activeSection: string
-}
-
-const Navbar = ({ activeSection }: NavbarProps) => {
+const Navbar = () => {
   const [scrolled, setScrolled] = useState(false)
+  const [activeSection, setActiveSection] = useState("hero")
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
     setMounted(true)
+
+    // Handle background opacity on scroll
     const handleScroll = () => {
       setScrolled(window.scrollY > 50)
     }
 
+    // Use Intersection Observer for active section highlighting
+    const sections = ["hero", "projects", "experience", "education", "certifications", "contact"]
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id)
+          }
+        })
+      },
+      {
+        rootMargin: "-20% 0px -79% 0px", // Triggers when section is comfortably in view
+      }
+    )
+
+    // Observe all sections
+    sections.forEach((section) => {
+      const element = document.getElementById(section)
+      if (element) observer.observe(element)
+    })
+
     window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+      observer.disconnect()
+    }
   }, [])
 
   const navItems = [

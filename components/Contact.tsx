@@ -3,28 +3,28 @@
 import { motion } from "framer-motion"
 import { Mail, Phone, MapPin } from "lucide-react"
 
-const Contact = () => {
-  const contactInfo = [
-    {
-      icon: Mail,
-      label: "Email",
-      value: "frizatrimaulana@gmail.com",
-      href: "mailto:frizatrimaulana@gmail.com",
-    },
-    {
-      icon: Phone,
-      label: "Telepon",
-      value: "+62 815-7369-3942",
-      href: "tel:+6281573693942",
-    },
-    {
-      icon: MapPin,
-      label: "Lokasi",
-      value: "Jl. Karya Bakti No.51, Kertasari, Kec. Ciamis, Kabupaten Ciamis, Jawa Barat 46213",
-      href: "https://maps.app.goo.gl/gE6CiVMmw4WKn7tWA",
-    },
-  ]
+const contactInfoData = [
+  {
+    icon: Mail,
+    label: "Email",
+    value: "frizatrimaulana@gmail.com",
+    href: "mailto:frizatrimaulana@gmail.com",
+  },
+  {
+    icon: Phone,
+    label: "Telepon",
+    value: "+62 815-7369-3942",
+    href: "tel:+6281573693942",
+  },
+  {
+    icon: MapPin,
+    label: "Lokasi",
+    value: "Jl. Karya Bakti No.51, Kertasari, Kec. Ciamis, Kabupaten Ciamis, Jawa Barat 46213",
+    href: "https://maps.app.goo.gl/gE6CiVMmw4WKn7tWA",
+  },
+]
 
+const Contact = () => {
   return (
     <section id="contact" className="py-20 bg-gray-50 dark:bg-gray-800">
       <div className="container mx-auto px-4">
@@ -51,7 +51,7 @@ const Contact = () => {
         >
           <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 md:p-12">
             <div className="space-y-8">
-              {contactInfo.map((item, index) => (
+              {contactInfoData.map((item, index) => (
                 <motion.a
                   key={index}
                   href={item.href}
@@ -91,7 +91,7 @@ const Contact = () => {
                 Atau kirim pesan langsung melalui email untuk diskusi lebih lanjut
               </p>
               <motion.a
-                href="mailto:muhammad.zaki@email.com"
+                href="mailto:frizatrimaulana@gmail.com"
                 className="inline-flex items-center gap-2 px-8 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors font-semibold"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}

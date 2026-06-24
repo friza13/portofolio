@@ -3,30 +3,30 @@
 import { motion } from "framer-motion"
 import { Github, Linkedin, Twitter, Instagram } from "lucide-react"
 
-const Footer = () => {
-  const socialLinks = [
-    {
-      icon: Github,
-      href: "https://github.com/friza13",
-      label: "GitHub",
-    },
-    {
-      icon: Linkedin,
-      href: "https://www.linkedin.com/in/friza-tri-maulana-a09387368/",
-      label: "LinkedIn",
-    },
-    {
-      icon: Twitter,
-      href: "https://twitter.com",
-      label: "Twitter",
-    },
-    {
-      icon: Instagram,
-      href: "https://https://www.instagram.com/friza_trim.com",
-      label: "Instagram",
-    },
-  ]
+const socialLinksData = [
+  {
+    icon: Github,
+    href: "https://github.com/friza13",
+    label: "GitHub",
+  },
+  {
+    icon: Linkedin,
+    href: "https://www.linkedin.com/in/friza-tri-maulana-a09387368/",
+    label: "LinkedIn",
+  },
+  {
+    icon: Twitter,
+    href: "https://twitter.com", // You can update this later with your real Twitter/X handle
+    label: "Twitter",
+  },
+  {
+    icon: Instagram,
+    href: "https://www.instagram.com/friza_trim",
+    label: "Instagram",
+  },
+]
 
+const Footer = () => {
   return (
     <footer className="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
       <div className="container mx-auto px-4 py-12">
@@ -56,7 +56,7 @@ const Footer = () => {
             viewport={{ once: true }}
             className="flex justify-center gap-6 mb-8"
           >
-            {socialLinks.map((social, index) => (
+            {socialLinksData.map((social, index) => (
               <motion.a
                 key={social.label}
                 href={social.href}
@@ -85,7 +85,7 @@ const Footer = () => {
             className="space-y-2 text-gray-600 dark:text-gray-300"
           >
             <p>© {new Date().getFullYear()} FRIZA TRI MAULANA. All rights reserved.</p>
-            <p className="text-sm">
+            <p className="text-linecap">
               Dibangun dengan <span className="text-blue-500 font-semibold">Next.js</span>,{" "}
               <span className="text-blue-500 font-semibold">Tailwind CSS</span>, dan{" "}
               <span className="text-blue-500 font-semibold">Framer Motion</span>

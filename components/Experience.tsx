@@ -3,54 +3,41 @@
 import { motion } from "framer-motion"
 import { MapPin, Calendar } from "lucide-react"
 
+const experiencesData = [
+  {
+    id: 1,
+    position: "Coming Soon",
+    company: "Coming Soon",
+    type: "Coming Soon",
+    period: "Coming Soon",
+    location: "Coming Soon",
+    description: "Coming Soon",
+    skills: ["Coming Soon"],
+  },
+]
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.3,
+    },
+  },
+}
+
+const itemVariants = {
+  hidden: { opacity: 0, x: -50 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.6,
+    },
+  },
+}
+
 const Experience = () => {
-  const experiences = [
-    {
-      id: 1,
-      position: "Coming Soon",
-      company: "Coming Soon",
-      type: "Coming Soon",
-      period: "Coming Soon",
-      location: "Coming Soon",
-      description: "Coming Soon",
-      skills: ["Coming Soon"],
-    },
-  ]
-
-  // Example of experience data structure:
-  // {
-  //   id: 1,
-  //   position: "Senior System Engineer",
-  //   company: "PT. Tech Solutions Indonesia",
-  //   type: "Full-time",
-  //   period: "Januari 2024 - Sekarang",
-  //   location: "Jakarta, Indonesia",
-  //   description:
-  //     "Memimpin tim dalam merancang dan mengimplementasikan infrastruktur sistem yang scalable. Bertanggung jawab atas optimasi performa sistem dan keamanan jaringan.",
-  //   skills: ["Linux", "Docker", "Kubernetes", "AWS", "Terraform", "Monitoring"],
-  // }
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.3,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, x: -50 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.6,
-      },
-    },
-  }
-
   return (
     <section id="experience" className="py-20 bg-white dark:bg-gray-900">
       <div className="container mx-auto px-4">
@@ -78,7 +65,7 @@ const Experience = () => {
             {/* Timeline Line */}
             <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-blue-200 dark:bg-blue-800"></div>
 
-            {experiences.map((exp, index) => (
+            {experiencesData.map((exp) => (
               <motion.div key={exp.id} variants={itemVariants} className="relative flex items-start mb-12">
                 {/* Timeline Dot */}
                 <div className="absolute left-6 w-4 h-4 bg-blue-500 rounded-full border-4 border-white dark:border-gray-900 shadow-lg"></div>

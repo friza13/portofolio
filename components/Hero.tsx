@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import { useState, useEffect } from "react"
 import { Download, Mail } from "lucide-react"
+import Image from "next/image"
 
 const Hero = () => {
   const [currentRole, setCurrentRole] = useState(0)
@@ -83,11 +84,11 @@ const Hero = () => {
             transition={{ delay: 0.8, duration: 0.8 }}
             className="text-gray-600 dark:text-gray-300 mb-8 max-w-lg"
           >
-            Saya adalah mahasiswa Informatika dari Universitas Siliwangi dengan gairah mendalam pada rekayasa infrastruktur digital. 
+            Saya adalah mahasiswa Informatika dari Universitas Siliwangi dengan gairah mendalam pada rekayasa infrastruktur digital.
             Keahlian inti saya terletak pada Administrasi Sistem Linux (Red Hat Certified) dan Rekayasa Jaringan (MTCNA Certified), yang saya gunakan untuk merancang dan memelihara sistem yang stabil, aman, dan efisien.
           <br />
-            Di luar infrastruktur, saya juga melengkapi diri dengan kemampuan Web Programming dan dasar-dasar C++. 
-            Saya sangat tertarik pada persimpangan antara jaringan dan kecerdasan buatan, terutama dalam penerapannya pada keamanan siber dan forensik digital. 
+            Di luar infrastruktur, saya juga melengkapi diri dengan kemampuan Web Programming dan dasar-dasar C++.
+            Saya sangat tertarik pada persimpangan antara jaringan dan kecerdasan buatan, terutama dalam penerapannya pada keamanan siber dan forensik digital.
             Sebagai pribadi yang adaptif dan memiliki jiwa kepemimpinan, saya selalu tertantang untuk menciptakan solusi teknologi yang inovatif dan berdampak.
           </motion.p>
 
@@ -137,12 +138,15 @@ const Hero = () => {
                 ],
               }}
               transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
-              className="w-80 h-80 rounded-full overflow-hidden border-4 border-white dark:border-gray-700 shadow-2xl"
+              className="w-80 h-80 rounded-full overflow-hidden border-4 border-white dark:border-gray-700 shadow-2xl relative"
             >
-              <img
+              <Image
                 src="/img/friza.jpg"
                 alt="Friza Tri Maulana"
-                className="w-full h-full object-cover"
+                fill
+                priority
+                sizes="(max-width: 768px) 100vw, 320px"
+                className="object-cover"
               />
             </motion.div>
           </div>
