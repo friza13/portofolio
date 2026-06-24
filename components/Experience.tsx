@@ -1,7 +1,8 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { MapPin, Calendar } from "lucide-react"
+import { MapPin, Calendar, Briefcase } from "lucide-react"
+import SectionHeading from "./SectionHeading"
 
 const experiencesData = [
   {
@@ -16,102 +17,111 @@ const experiencesData = [
   },
 ]
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.3,
-    },
-  },
-}
-
-const itemVariants = {
-  hidden: { opacity: 0, x: -50 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.6,
-    },
-  },
-}
+const isPlaceholder =
+  experiencesData.length === 1 && experiencesData[0].position === "Coming Soon"
 
 const Experience = () => {
   return (
-    <section id="experience" className="py-20 bg-white dark:bg-gray-900">
-      <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl font-bold mb-4 gradient-text">Pengalaman Kerja</h2>
-          <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Perjalanan karir saya dalam bidang teknologi informasi dan pengembangan sistem.
-          </p>
-        </motion.div>
+    <section id="experience" className="relative py-24 sm:py-32">
+      {/* subtle dotted bg */}
+      <div className="absolute inset-0 -z-10 bg-dots mask-fade-b opacity-40" />
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="max-w-4xl mx-auto"
-        >
-          <div className="relative">
-            {/* Timeline Line */}
-            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-blue-200 dark:bg-blue-800"></div>
+      <div className="container mx-auto max-w-4xl px-6">
+        <SectionHeading
+          kicker="experience"
+          title="Pengalaman Kerja"
+          description="Perjalanan karier saya dalam teknologi informasi dan rekayasa sistem."
+        />
 
-            {experiencesData.map((exp) => (
-              <motion.div key={exp.id} variants={itemVariants} className="relative flex items-start mb-12">
-                {/* Timeline Dot */}
-                <div className="absolute left-6 w-4 h-4 bg-blue-500 rounded-full border-4 border-white dark:border-gray-900 shadow-lg"></div>
+        {isPlaceholder ? (
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="mx-auto max-w-xl overflow-hidden rounded-2xl border border-border surface"
+          >
+            {/* terminal chrome */}
+            <div className="flex items-center gap-2 border-b border-border bg-secondary/40 px-4 py-2.5">
+              <span className="flex gap-1.5">
+                <span className="h-2.5 w-2.5 rounded-full bg-red-400/80" />
+                <span className="h-2.5 w-2.5 rounded-full bg-yellow-400/80" />
+                <span className="h-2.5 w-2.5 rounded-full bg-green-400/80" />
+              </span>
+              <span className="ml-1 font-mono text-xs text-muted-foreground">~/experience</span>
+            </div>
+            <div className="space-y-2 p-6 font-mono text-sm">
+              <p className="text-muted-foreground">
+                <span className="text-primary">$</span> git log --oneline experience/
+              </p>
+              <p className="text-foreground">
+                <span className="text-violet-400">›</span> Sedang membangun jejak karier...
+              </p>
+              <p className="text-muted-foreground">
+                Saat ini fokus mengasah skill lewat sertifikasi & proyek nyata.
+              </p>
+              <p className="pt-2 text-foreground">
+                Segera hadir
+                <span className="ml-1 inline-block h-4 w-2 translate-y-0.5 bg-primary animate-blink" />
+              </p>
+            </div>
+          </motion.div>
+        ) : (
+          <div className="relative mx-auto max-w-3xl">
+            {/* timeline line */}
+            <div className="absolute left-4 top-2 bottom-2 w-px bg-gradient-to-b from-indigo-500/60 via-border to-transparent md:left-1/2" />
 
-                {/* Content Card */}
-                <div className="ml-20 bg-gray-50 dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 w-full">
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                    <div>
-                      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">{exp.position}</h3>
-                      <p className="text-blue-600 dark:text-blue-400 font-semibold">{exp.company}</p>
-                    </div>
-                    <div className="mt-2 md:mt-0">
-                      <span className="inline-block px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-sm rounded-full">
+            <div className="space-y-10">
+              {experiencesData.map((exp, index) => (
+                <motion.div
+                  key={exp.id}
+                  initial={{ opacity: 0, x: -30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="relative pl-12 md:pl-0 md:grid md:grid-cols-2 md:gap-8"
+                >
+                  {/* node */}
+                  <span className="absolute left-2.5 top-2 z-10 flex h-3 w-3 -translate-x-1/2 items-center justify-center rounded-full bg-gradient-to-br from-indigo-500 to-violet-500 ring-4 ring-background md:left-1/2" />
+
+                  <div className={index % 2 === 0 ? "md:text-right md:pr-8" : "md:col-start-2 md:pl-8"}>
+                    <div className="border-glow rounded-2xl border border-border surface p-6">
+                      <span className="mb-3 inline-flex items-center gap-1.5 rounded-full border border-border bg-secondary/50 px-2.5 py-0.5 font-mono text-xs text-primary">
+                        <Briefcase className="h-3 w-3" />
                         {exp.type}
                       </span>
+                      <h3 className="text-lg font-bold">{exp.position}</h3>
+                      <p className="font-medium text-primary">{exp.company}</p>
+                      <div className="mt-3 flex flex-wrap items-center gap-4 text-xs text-muted-foreground md:justify-end">
+                        <span className="flex items-center gap-1">
+                          <Calendar className="h-3.5 w-3.5" />
+                          {exp.period}
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <MapPin className="h-3.5 w-3.5" />
+                          {exp.location}
+                        </span>
+                      </div>
+                      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                        {exp.description}
+                      </p>
+                      <div className="mt-4 flex flex-wrap gap-1.5 md:justify-end">
+                        {exp.skills.map((skill) => (
+                          <span
+                            key={skill}
+                            className="rounded-md border border-border bg-secondary/50 px-2 py-0.5 font-mono text-[11px] text-muted-foreground"
+                          >
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
-
-                  <div className="flex flex-col md:flex-row gap-4 mb-4 text-gray-600 dark:text-gray-300">
-                    <div className="flex items-center gap-2">
-                      <Calendar className="w-4 h-4" />
-                      <span className="text-sm">{exp.period}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <MapPin className="w-4 h-4" />
-                      <span className="text-sm">{exp.location}</span>
-                    </div>
-                  </div>
-
-                  <p className="text-gray-700 dark:text-gray-300 mb-4">{exp.description}</p>
-
-                  <div className="flex flex-wrap gap-2">
-                    {exp.skills.map((skill) => (
-                      <span
-                        key={skill}
-                        className="px-3 py-1 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-sm rounded-full border border-gray-200 dark:border-gray-600"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              ))}
+            </div>
           </div>
-        </motion.div>
+        )}
       </div>
     </section>
   )

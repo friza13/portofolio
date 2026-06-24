@@ -3,23 +3,26 @@
 import { motion } from "framer-motion"
 import { GraduationCap, Calendar } from "lucide-react"
 import Image from "next/image"
+import SectionHeading from "./SectionHeading"
 
 const educationsData = [
   {
     id: 1,
     institution: "Universitas Siliwangi",
-    degree: "Informatika",
+    degree: "S1 Informatika",
     period: "2023 - sekarang",
     logo: "/img/LOGO-UNSIL.png",
-    description: "Fokus pada pengembangan software, jaringan komputer, dan sistem informasi. IPK: 3.7/4.00",
+    description:
+      "Fokus pada pengembangan software, jaringan komputer, dan sistem informasi. IPK: 3.7 / 4.00.",
   },
   {
     id: 2,
     institution: "SMA Negeri 1 Ciamis",
-    degree: " MIPA (Matematika dan Ilmu Pengetahuan Alam)",
+    degree: "MIPA (Matematika & Ilmu Pengetahuan Alam)",
     period: "2020 - 2023",
     logo: "/img/Logo_SMAN_1_Ciamis.svg.png",
-    description: "Mengembangkan fondasi yang kuat dalam berpikir logis, analitis, dan pemecahan masalah melalui studi mendalam di bidang Matematika dan Ilmu Alam.",
+    description:
+      "Membangun fondasi kuat dalam berpikir logis, analitis, dan pemecahan masalah melalui Matematika dan Ilmu Alam.",
   },
   {
     id: 3,
@@ -27,99 +30,74 @@ const educationsData = [
     degree: "Sekolah Menengah Pertama",
     period: "2017 - 2020",
     logo: "/img/Logo_SMPN_5_Ciamis.svg.png",
-    description: "Pendidikan menengah pertama dengan fokus pada dasar-dasar ilmu pengetahuan dan teknologi.",
+    description:
+      "Pendidikan menengah pertama dengan fokus pada dasar-dasar ilmu pengetahuan dan teknologi.",
   },
 ]
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.3,
-    },
-  },
-}
-
-const itemVariants = {
-  hidden: { opacity: 0, x: -50 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.6,
-    },
-  },
-}
+const encode = (path: string) => path.replace(/ /g, "%20")
 
 const Education = () => {
   return (
-    <section id="education" className="py-20 bg-gray-50 dark:bg-gray-800">
-      <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl font-bold mb-4 gradient-text">Pendidikan</h2>
-          <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Latar belakang pendidikan yang mendukung perjalanan karir di bidang teknologi informasi.
-          </p>
-        </motion.div>
+    <section id="education" className="relative py-24 sm:py-32">
+      <div className="container mx-auto max-w-4xl px-6">
+        <SectionHeading
+          kicker="education"
+          title="Pendidikan"
+          description="Latar belakang pendidikan yang membentuk fondasi karier di bidang teknologi."
+        />
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="max-w-4xl mx-auto"
-        >
-          <div className="relative">
-            {/* Timeline Line */}
-            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-blue-200 dark:bg-blue-800"></div>
+        <div className="relative">
+          {/* rail */}
+          <div className="absolute left-5 top-2 bottom-2 w-px bg-gradient-to-b from-indigo-500/60 via-border to-transparent" />
 
-            {educationsData.map((edu) => (
-              <motion.div key={edu.id} variants={itemVariants} className="relative flex items-start mb-12">
-                {/* Timeline Dot */}
-                <div className="absolute left-6 w-4 h-4 bg-blue-500 rounded-full border-4 border-white dark:border-gray-800 shadow-lg"></div>
+          <div className="space-y-6">
+            {educationsData.map((edu, index) => (
+              <motion.div
+                key={edu.id}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true, margin: "-60px" }}
+                className="relative pl-14"
+              >
+                {/* node */}
+                <span className="absolute left-5 top-6 z-10 h-3 w-3 -translate-x-1/2 rounded-full bg-gradient-to-br from-indigo-500 to-violet-500 ring-4 ring-background" />
 
-                {/* Content Card */}
-                <div className="ml-20 bg-white dark:bg-gray-900 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 w-full">
+                <div className="border-glow rounded-2xl border border-border surface p-5">
                   <div className="flex items-start gap-4">
-                    <div className="flex-shrink-0 relative w-12 h-12 rounded-lg overflow-hidden bg-white">
+                    <div className="relative h-14 w-14 flex-shrink-0 overflow-hidden rounded-xl border border-border bg-white">
                       <Image
-                        src={edu.logo ? edu.logo.replace(/ /g, "%20") : "/placeholder.svg"}
+                        src={encode(edu.logo)}
                         alt={edu.institution}
                         fill
-                        sizes="48px"
-                        className="object-contain p-1"
+                        sizes="56px"
+                        className="object-contain p-1.5"
                       />
                     </div>
 
-                    <div className="flex-grow">
-                      <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
-                        <h3 className="text-xl font-bold text-gray-900 dark:text-white">{edu.institution}</h3>
-                        <div className="flex items-center gap-2 text-gray-600 dark:text-gray-300 mt-1 md:mt-0">
-                          <Calendar className="w-4 h-4" />
-                          <span className="text-sm">{edu.period}</span>
-                        </div>
+                    <div className="flex-1">
+                      <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+                        <h3 className="text-base font-bold">{edu.institution}</h3>
+                        <span className="inline-flex w-fit items-center gap-1 rounded-full border border-border bg-secondary/50 px-2.5 py-0.5 font-mono text-xs text-muted-foreground">
+                          <Calendar className="h-3 w-3" />
+                          {edu.period}
+                        </span>
                       </div>
-
-                      <div className="flex items-center gap-2 mb-3">
-                        <GraduationCap className="w-5 h-5 text-blue-500" />
-                        <p className="text-blue-600 dark:text-blue-400 font-semibold">{edu.degree}</p>
-                      </div>
-
-                      <p className="text-gray-700 dark:text-gray-300">{edu.description}</p>
+                      <p className="mt-1 flex items-center gap-1.5 text-sm font-medium text-primary">
+                        <GraduationCap className="h-4 w-4" />
+                        {edu.degree}
+                      </p>
+                      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                        {edu.description}
+                      </p>
                     </div>
                   </div>
                 </div>
               </motion.div>
             ))}
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   )

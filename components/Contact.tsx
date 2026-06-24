@@ -1,7 +1,8 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Mail, Phone, MapPin } from "lucide-react"
+import { Mail, Phone, MapPin, ArrowUpRight, Send } from "lucide-react"
+import SectionHeading from "./SectionHeading"
 
 const contactInfoData = [
   {
@@ -9,97 +10,86 @@ const contactInfoData = [
     label: "Email",
     value: "frizatrimaulana@gmail.com",
     href: "mailto:frizatrimaulana@gmail.com",
+    external: false,
   },
   {
     icon: Phone,
     label: "Telepon",
     value: "+62 815-7369-3942",
     href: "tel:+6281573693942",
+    external: false,
   },
   {
     icon: MapPin,
     label: "Lokasi",
-    value: "Jl. Karya Bakti No.51, Kertasari, Kec. Ciamis, Kabupaten Ciamis, Jawa Barat 46213",
+    value: "Ciamis, Jawa Barat, Indonesia",
     href: "https://maps.app.goo.gl/gE6CiVMmw4WKn7tWA",
+    external: true,
   },
 ]
 
 const Contact = () => {
   return (
-    <section id="contact" className="py-20 bg-gray-50 dark:bg-gray-800">
-      <div className="container mx-auto px-4">
+    <section id="contact" className="relative py-24 sm:py-32">
+      <div className="container mx-auto max-w-5xl px-6">
+        <SectionHeading
+          kicker="contact"
+          title="Mari Terhubung"
+          description="Terbuka untuk diskusi proyek baru, peluang kerja, atau sekadar berbagi ide tentang teknologi."
+        />
+
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
+          viewport={{ once: true, margin: "-60px" }}
+          className="overflow-hidden rounded-3xl border border-border surface"
         >
-          <h2 className="text-4xl font-bold mb-4 gradient-text">Hubungi Saya</h2>
-          <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Mari berkolaborasi! Saya selalu terbuka untuk mendiskusikan proyek baru, peluang kerja, atau sekadar berbagi
-            ide tentang teknologi.
-          </p>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="max-w-2xl mx-auto"
-        >
-          <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 md:p-12">
-            <div className="space-y-8">
-              {contactInfoData.map((item, index) => (
-                <motion.a
-                  key={index}
-                  href={item.href}
-                  target={item.label === "Lokasi" ? "_blank" : undefined}
-                  rel={item.label === "Lokasi" ? "noopener noreferrer" : undefined}
-                  className="flex items-center gap-6 p-4 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-300 group"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.2, duration: 0.6 }}
-                  viewport={{ once: true }}
-                >
-                  <div className="flex-shrink-0">
-                    <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-xl flex items-center justify-center group-hover:bg-blue-200 dark:group-hover:bg-blue-800 transition-colors">
-                      <item.icon className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-                    </div>
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">{item.label}</p>
-                    <p className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                      {item.value}
-                    </p>
-                  </div>
-                </motion.a>
-              ))}
+          <div className="grid md:grid-cols-2">
+            {/* Left — CTA */}
+            <div className="relative flex flex-col justify-between gap-8 border-b border-border p-8 md:border-b-0 md:border-r">
+              <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-indigo-500/10 blur-3xl" />
+              <div className="relative">
+                <p className="font-mono text-sm text-primary">$ ./contact --me</p>
+                <h3 className="mt-4 text-2xl font-bold tracking-tight">
+                  Punya proyek atau ide?
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                  Kirim pesan langsung lewat email — biasanya saya balas dalam 1×24 jam.
+                </p>
+              </div>
+              <a
+                href="mailto:frizatrimaulana@gmail.com"
+                className="group relative inline-flex w-fit items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 px-6 py-3 font-medium text-white shadow-lg shadow-indigo-500/25 transition-all hover:-translate-y-0.5 hover:shadow-indigo-500/40"
+              >
+                <Send className="h-4 w-4" />
+                Kirim Email
+              </a>
             </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.6 }}
-              viewport={{ once: true }}
-              className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700 text-center"
-            >
-              <p className="text-gray-600 dark:text-gray-300 mb-6">
-                Atau kirim pesan langsung melalui email untuk diskusi lebih lanjut
-              </p>
-              <motion.a
-                href="mailto:frizatrimaulana@gmail.com"
-                className="inline-flex items-center gap-2 px-8 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors font-semibold"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Mail className="w-5 h-5" />
-                Kirim Email
-              </motion.a>
-            </motion.div>
+            {/* Right — contact list */}
+            <div className="divide-y divide-border">
+              {contactInfoData.map((item) => (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  target={item.external ? "_blank" : undefined}
+                  rel={item.external ? "noopener noreferrer" : undefined}
+                  className="group flex items-center gap-4 p-6 transition-colors hover:bg-secondary/40"
+                >
+                  <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl border border-border bg-secondary/50 text-primary transition-colors group-hover:border-primary/40">
+                    <item.icon className="h-5 w-5" />
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <p className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
+                      {item.label}
+                    </p>
+                    <p className="truncate font-medium text-foreground">{item.value}</p>
+                  </div>
+                  <ArrowUpRight className="h-4 w-4 flex-shrink-0 text-muted-foreground transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary" />
+                </a>
+              ))}
+            </div>
           </div>
         </motion.div>
       </div>

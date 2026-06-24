@@ -3,13 +3,14 @@
 import { motion } from "framer-motion"
 import { ExternalLink, Github, Users } from "lucide-react"
 import Image from "next/image"
+import SectionHeading from "./SectionHeading"
 
 const projectsData = [
   {
     id: 1,
     title: "EDUBOT",
     description:
-      "EduBot adalah aplikasi desktop AI untuk Linux yang membantu pengguna memahami kode, membuat skrip, dan memberikan bantuan terminal dengan teknologi ChatGPT,gemini, dan deepseek.",
+      "Aplikasi desktop AI untuk Linux yang membantu pengguna memahami kode, membuat skrip, dan memberikan bantuan terminal dengan teknologi ChatGPT, Gemini, dan DeepSeek.",
     image: "/img/edubot_icon.png",
     technologies: ["Python", "PyQt5", "ChatGPT API", "Gemini API", "DeepSeek API"],
     contributors: 1,
@@ -21,7 +22,7 @@ const projectsData = [
     id: 2,
     title: "Monitoring Server",
     description:
-      "Web Status Server adalah aplikasi monitoring server berbasis Node.js yang menampilkan informasi status sistem secara real-time melalui dashboard web yang interaktif.",
+      "Aplikasi monitoring server berbasis Node.js yang menampilkan informasi status sistem secara real-time melalui dashboard web yang interaktif.",
     image: "/img/server.png",
     technologies: ["Node.js", "Express", "Socket.io", "EJS", "Bootstrap"],
     contributors: 2,
@@ -31,11 +32,11 @@ const projectsData = [
   },
   {
     id: 3,
-    title: "suga server",
+    title: "Suga Server",
     description:
-      "Suga Server adalah server pribadi yang menyediakan berbagai layanan seperti web server, file sharing, dan aplikasi web dengan teknologi Docker, Nginx, Samba, Node.js, React, MySQL, dan PHP.",
+      "Server pribadi yang menyediakan berbagai layanan seperti web server, file sharing, dan aplikasi web dengan teknologi Docker, Nginx, Samba, Node.js, React, MySQL, dan PHP.",
     image: "/img/suga_server.png",
-    technologies: ["Linux", "Docker", "Nginx", "Samba", "Node.js", "React", "Mysql", "php"],
+    technologies: ["Linux", "Docker", "Nginx", "Samba", "Node.js", "React", "MySQL", "PHP"],
     contributors: 2,
     githubUrl: "https://github.com",
     demoUrl: "https://demo.com",
@@ -43,11 +44,11 @@ const projectsData = [
   },
   {
     id: 4,
-    title: "mishell edu",
+    title: "Mishell EDU",
     description:
-      "Mishell-EDU adalah custom shell untuk Linux yang ditulis dalam C. Dilengkapi integrasi Google Gemini AI untuk menerjemahkan bahasa manusia menjadi perintah terminal, serta memiliki fitur monitoring sistem dan utilitas jaringan.",
+      "Custom shell untuk Linux yang ditulis dalam C. Dilengkapi integrasi Google Gemini AI untuk menerjemahkan bahasa manusia menjadi perintah terminal, serta fitur monitoring sistem dan utilitas jaringan.",
     image: "/img/mishell-edu.png",
-    technologies: ["C", "Linux", "Google Gemini API", "Terminal", "Monitoring"],
+    technologies: ["C", "Linux", "Gemini API", "Terminal", "Monitoring"],
     contributors: 2,
     githubUrl: "https://github.com/friza13/MISHELL-EDU.git",
     demoUrl: "https://demo.com",
@@ -55,9 +56,9 @@ const projectsData = [
   },
   {
     id: 5,
-    title: "system zakat",
+    title: "System Zakat",
     description:
-      "Web Zakat Laravel adalah aplikasi manajemen zakat berbasis Laravel yang memudahkan pencatatan, penghitungan, dan distribusi zakat secara digital, lengkap dengan fitur laporan dan konversi zakat uang ke beras sesuai standar.",
+      "Aplikasi manajemen zakat berbasis Laravel yang memudahkan pencatatan, penghitungan, dan distribusi zakat secara digital, lengkap dengan fitur laporan dan konversi zakat uang ke beras sesuai standar.",
     image: "/img/zakat.png",
     technologies: ["Laravel", "PHP", "MySQL", "Bootstrap", "Vue.js"],
     contributors: 3,
@@ -67,11 +68,11 @@ const projectsData = [
   },
   {
     id: 6,
-    title: "eduword",
+    title: "EduWord",
     description:
-      "EduWord adalah aplikasi pengolah kata mirip Microsoft Word untuk Linux, dibuat dengan C++ dan Qt, yang mendukung pemformatan teks, pengelolaan dokumen, dan pencetakan.",
+      "Aplikasi pengolah kata mirip Microsoft Word untuk Linux, dibuat dengan C++ dan Qt, mendukung pemformatan teks, pengelolaan dokumen, dan pencetakan.",
     image: "/img/eduword.png",
-    technologies: ["C++", "Qt", "Linux", "Pemrograman GUI"],
+    technologies: ["C++", "Qt", "Linux", "GUI"],
     contributors: 1,
     githubUrl: "https://github.com/friza13/eduword.git",
     demoUrl: "https://demo.com",
@@ -79,138 +80,130 @@ const projectsData = [
   },
 ]
 
+// Placeholder URLs that shouldn't render as real links
+const isRealUrl = (url: string) =>
+  Boolean(url) && !/^https?:\/\/(www\.)?(demo\.com|github\.com)\/?$/.test(url)
+
 const containerVariants = {
   hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-    },
-  },
+  visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
 }
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 50 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-    },
-  },
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 }
 
 const Projects = () => {
   return (
-    <section id="projects" className="py-20 bg-gray-50 dark:bg-gray-800">
-      <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl font-bold mb-4 gradient-text">Proyek Unggulan</h2>
-          <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Berikut adalah beberapa proyek yang telah saya kerjakan, menunjukkan keahlian dalam berbagai teknologi dan
-            domain.
-          </p>
-        </motion.div>
+    <section id="projects" className="relative py-24 sm:py-32">
+      <div className="container mx-auto max-w-6xl px-6">
+        <SectionHeading
+          kicker="projects"
+          title="Proyek Unggulan"
+          description="Pilihan proyek yang menunjukkan keahlian lintas teknologi — dari infrastruktur Linux & jaringan hingga aplikasi desktop dan web."
+        />
 
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          viewport={{ once: true, margin: "-60px" }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
-          {projectsData.map((project) => (
-            <motion.div
-              key={project.id}
-              variants={cardVariants}
-              className="bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col"
-              whileHover={{ y: -5 }}
-            >
-              <div className="relative h-48 w-full overflow-hidden">
-                <motion.div
-                  className="w-full h-full relative"
-                  whileHover={{ scale: 1.1 }}
-                  transition={{ duration: 0.3 }}
-                >
+          {projectsData.map((project) => {
+            const hasRepo = isRealUrl(project.githubUrl)
+            const hasDemo = isRealUrl(project.demoUrl)
+
+            return (
+              <motion.article
+                key={project.id}
+                variants={cardVariants}
+                whileHover={{ y: -6 }}
+                className="border-glow group relative flex flex-col overflow-hidden rounded-2xl border border-border surface"
+              >
+                {/* Image */}
+                <div className="relative aspect-video overflow-hidden">
                   <Image
                     src={project.image}
                     alt={project.title}
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    className="object-cover"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                </motion.div>
-              </div>
-
-              <div className="p-6 flex flex-col flex-grow">
-                <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">{project.title}</h3>
-                <p className="text-gray-600 dark:text-gray-300 mb-4 text-sm flex-grow">{project.description}</p>
-
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.technologies.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded-full"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+                  <div className="absolute inset-0 bg-gradient-to-t from-card via-card/30 to-transparent" />
+                  <span className="absolute left-3 top-3 rounded-md border border-border bg-background/70 px-2 py-1 font-mono text-xs text-primary backdrop-blur">
+                    {String(project.id).padStart(2, "0")}
+                  </span>
                 </div>
 
-                <div className="flex items-center justify-between mt-auto">
-                  <div>
-                    <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400">
-                      <Users className="w-4 h-4" />
-                      <span className="text-sm">{project.contributors} kontributor</span>
-                    </div>
-                    {/* Foto kontributor */}
-                    <div className="flex gap-1 mt-2">
-                      {project.contributorsPhoto && project.contributorsPhoto.map((photo, idx) => (
-                        <div key={idx} className="relative w-6 h-6 rounded-full border-2 border-white dark:border-gray-700 overflow-hidden">
-                          <Image
-                            src={photo}
-                            alt="Contributor"
-                            fill
-                            sizes="24px"
-                            className="object-cover"
-                          />
-                        </div>
-                      ))}
-                    </div>
+                {/* Body */}
+                <div className="flex flex-1 flex-col p-5">
+                  <h3 className="text-lg font-bold tracking-tight">{project.title}</h3>
+                  <p className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-muted-foreground">
+                    {project.description}
+                  </p>
+
+                  {/* Tech */}
+                  <div className="mt-4 flex flex-wrap gap-1.5">
+                    {project.technologies.map((tech) => (
+                      <span
+                        key={tech}
+                        className="rounded-md border border-border bg-secondary/50 px-2 py-0.5 font-mono text-[11px] text-muted-foreground"
+                      >
+                        {tech}
+                      </span>
+                    ))}
                   </div>
 
-                  <div className="flex gap-2">
-                    <motion.a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-2 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                    >
-                      <Github className="w-4 h-4" />
-                    </motion.a>
-                    <motion.a
-                      href={project.demoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                    >
-                      <ExternalLink className="w-4 h-4" />
-                    </motion.a>
+                  {/* Footer */}
+                  <div className="mt-5 flex items-center justify-between border-t border-border pt-4">
+                    <div className="flex items-center gap-2">
+                      <div className="flex -space-x-2">
+                        {project.contributorsPhoto.map((photo, idx) => (
+                          <div
+                            key={idx}
+                            className="relative h-7 w-7 overflow-hidden rounded-full border-2 border-card"
+                          >
+                            <Image src={photo} alt="Contributor" fill sizes="28px" className="object-cover" />
+                          </div>
+                        ))}
+                      </div>
+                      <span className="flex items-center gap-1 text-xs text-muted-foreground">
+                        <Users className="h-3.5 w-3.5" />
+                        {project.contributors}
+                      </span>
+                    </div>
+
+                    <div className="flex gap-2">
+                      {hasRepo && (
+                        <a
+                          href={project.githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label="Repositori GitHub"
+                          className="flex h-8 w-8 items-center justify-center rounded-lg border border-border text-muted-foreground transition-colors hover:text-foreground hover:border-foreground/30"
+                        >
+                          <Github className="h-4 w-4" />
+                        </a>
+                      )}
+                      {hasDemo && (
+                        <a
+                          href={project.demoUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label="Live demo"
+                          className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-r from-indigo-500 to-violet-500 text-white transition-transform hover:scale-105"
+                        >
+                          <ExternalLink className="h-4 w-4" />
+                        </a>
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.article>
+            )
+          })}
         </motion.div>
       </div>
     </section>
